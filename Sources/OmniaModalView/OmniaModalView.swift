@@ -22,6 +22,7 @@ public struct OmniaModalView<Content> : View where Content : View {
     @GestureState private var dragState = DragState.inactive
     @Binding var isShown:Bool
     var color: LinearGradient
+    var modalHeight:CGFloat
     
     private func onDragEnded(drag: DragGesture.Value) {
         let dragThreshold = modalHeight * (2/3)
@@ -30,14 +31,14 @@ public struct OmniaModalView<Content> : View where Content : View {
         }
     }
     
-    var modalHeight:CGFloat = 400
     
     var content: () -> Content
     
-    public init(isShown: Binding<Bool>, backgroundColor: LinearGradient, content: @escaping () -> Content) {
+    public init(isShown: Binding<Bool>, backgroundColor: LinearGradient, modalHeight: CGFloat , content: @escaping () -> Content) {
         self._isShown = isShown
         self.color = backgroundColor
         self.content = content
+        self.modalHeight = modalHeight
     }
     
     public var body: some View {
